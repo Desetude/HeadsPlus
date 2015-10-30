@@ -15,14 +15,18 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.desetude.headsplus;
+package me.desetude.headsplus.commands.hpcommands;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import me.desetude.headsplus.commands.HPCommand;
+import org.bukkit.command.CommandSender;
 
-public class HeadsPlus extends JavaPlugin {
+import java.util.List;
+
+public class HelpCommand extends HPCommand {
 
     @Override
-    public void onEnable(){
+    public void run(CommandSender sender, List<String> args) {
+
     }
 
 }

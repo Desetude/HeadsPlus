@@ -17,12 +17,31 @@
 
 package me.desetude.headsplus;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import lombok.Getter;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
-public class HeadsPlus extends JavaPlugin {
+@Getter
+public class Head {
 
-    @Override
-    public void onEnable(){
+    private HeadCategory category;
+    private ItemStack skull;
+
+    public Head(Plugin plugin, String name, HeadCategory category, String playerName) {
+        this.category = category;
+        skull = new ItemStack(Material.SKULL_ITEM);
+        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+        skullMeta.setDisplayName(name);
+        //Async as it may need to lookup skin
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                skullMeta.setOwner(playerName);
+            }
+        }.runTaskAsynchronously(plugin);
     }
 
 }

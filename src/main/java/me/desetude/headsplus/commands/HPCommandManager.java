@@ -15,14 +15,36 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.desetude.headsplus;
+package me.desetude.headsplus.commands;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import java.util.HashMap;
+import java.util.Map;
 
-public class HeadsPlus extends JavaPlugin {
+public class HPCommandManager {
 
-    @Override
-    public void onEnable(){
+    private Map<String, HPCommand> hpCommands;
+
+    public HPCommandManager() {
+        hpCommands = new HashMap<>();
+    }
+
+    public HPCommand getHPCommand(String name) {
+        return hpCommands.get(name);
+    }
+
+    public void registerHPCommand(HPCommand subCommand, String... names) {
+        for (String name : names) {
+            hpCommands.put(name, subCommand);
+        }
+    }
+
+    public boolean containsCommand(String name) {
+        for (String string : hpCommands.keySet()) {
+            if (name.equals(string.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

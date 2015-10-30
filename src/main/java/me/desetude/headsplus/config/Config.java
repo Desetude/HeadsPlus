@@ -18,16 +18,31 @@
 package me.desetude.headsplus.config;
 
 import lombok.Getter;
+import me.desetude.headsplus.HeadsPlus;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
 
 @Getter
 public class Config {
 
     private final FileConfiguration config;
+    private final File file;
 
-    Config(FileConfiguration config) {
+    Config(FileConfiguration config, File file) {
         this.config = config;
+        this.file = file;
+    }
+
+    public void save() {
+        try {
+            config.save(file);
+        } catch (IOException ex) {
+            LoggerFactory.getLogger(HeadsPlus.class).error("Could not save file " + file.getName(), ex);
+        }
     }
 
     public static ConfigBuilder builder(Plugin plugin) {

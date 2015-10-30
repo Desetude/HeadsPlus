@@ -17,12 +17,17 @@
 
 package me.desetude.headsplus;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import me.desetude.headsplus.config.Config;
+import org.bukkit.block.Skull;
+import org.bukkit.plugin.Plugin;
 
-public class HeadsPlus extends JavaPlugin {
+public class HeadCache {
 
-    @Override
-    public void onEnable(){
+    private Config cache;
+
+    public HeadCache(Plugin plugin) {
+        cache = Config.builder(plugin).fileName("cache").build();
+        Skull skull;
     }
 
 }

@@ -15,10 +15,27 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.desetude.headsplus;
+package me.desetude.headsplus.commands;
 
-public enum ConfigType {
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 
-    YAML
+import java.util.Arrays;
+
+public class HPCommandListener implements CommandExecutor {
+
+    private HPCommandManager headsCommandManager;
+
+    public HPCommandListener(HPCommandManager subCommandManager) {
+        this.headsCommandManager = subCommandManager;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
+        String newCommand = args.length > 0 && headsCommandManager.containsCommand(args[0]) ? args[0] : "?";
+        headsCommandManager.getHPCommand(newCommand).run(commandSender, Arrays.asList(args));
+        return true;
+    }
 
 }

@@ -17,12 +17,5 @@
 
 package me.desetude.headsplus;
 
-import org.bukkit.plugin.java.JavaPlugin;
-
-public class HeadsPlus extends JavaPlugin {
-
-    @Override
-    public void onEnable(){
-    }
-
+public class HeadCategory {
 }

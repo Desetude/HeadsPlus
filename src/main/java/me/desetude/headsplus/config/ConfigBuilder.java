@@ -20,7 +20,6 @@ package me.desetude.headsplus.config;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import me.desetude.headsplus.Builder;
-import me.desetude.headsplus.ConfigType;
 import me.desetude.headsplus.HeadsPlus;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -33,33 +32,30 @@ import java.io.IOException;
 @Setter
 public class ConfigBuilder implements Builder<Config> {
 
-    String path;
     String fileName;
-    //TODO May add support for XML as it is <3
+    //TODO May add support for an other type which would be used for head caching
     ConfigType configType;
 
-    private Plugin plugin;
+    private File dataFolder;
 
     ConfigBuilder(Plugin plugin) {
-        fileName = "me/desetude/headsplus/config";
+        fileName = "config";
         configType = ConfigType.YAML;
-        this.plugin = plugin;
+        this.dataFolder = plugin.getDataFolder();
     }
 
     @Override
     public Config build() {
         String extension = configType == ConfigType.YAML ? ".yml" : "";
-        File file = new File(plugin.getDataFolder() + path, fileName + extension);
-
+        File file = new File(dataFolder, fileName + extension);
         if (!file.exists()) {
             try {
                 file.createNewFile();
-            } catch (IOException exception) {
-                LoggerFactory.getLogger(HeadsPlus.class).error("Could not load file " + fileName, exception);
+            } catch (IOException ex) {
+                LoggerFactory.getLogger(HeadsPlus.class).error("Could not load file " + fileName, ex);
             }
         }
-
-        return new Config(YamlConfiguration.loadConfiguration(file));
+        return new Config(YamlConfiguration.loadConfiguration(file), file);
     }
 
 }

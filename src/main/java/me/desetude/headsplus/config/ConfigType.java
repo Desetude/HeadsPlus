@@ -15,14 +15,10 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.desetude.headsplus;
+package me.desetude.headsplus.config;
 
-import org.bukkit.plugin.java.JavaPlugin;
+public enum ConfigType {
 
-public class HeadsPlus extends JavaPlugin {
-
-    @Override
-    public void onEnable(){
-    }
+    YAML
 
 }
