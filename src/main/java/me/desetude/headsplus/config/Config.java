@@ -41,7 +41,7 @@ public class Config {
         try {
             config.save(file);
         } catch (IOException ex) {
-            LoggerFactory.getLogger(HeadsPlus.class).error("Could not save file " + file.getName(), ex);
+            LoggerFactory.getLogger(HeadsPlus.class).error("Could not save file " + file.getName() + "!", ex);
         }
     }
 
